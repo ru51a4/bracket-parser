@@ -1,5 +1,5 @@
 class bracketsParser {
-    static parse = async (arg, str) => {
+    static parse = async (str, ...args) => {
         str = str.split("");
         let stack = [[]];
         let t = '';
@@ -38,12 +38,13 @@ class bracketsParser {
         }
 
         let calc = async (arr) => {
-
-            for (let i = 0; i <= arr.length - 1; i++) {
-                for (const key of Object.keys(arg)) {
-                    if (arr[i] === key) {
-                        arr.splice(i - 1, 3, { kek: await arg[key](arr[i - 1], arr[i + 1]) });
-                        i = i - 1;
+            for (const arg of args) {
+                for (let i = 0; i <= arr.length - 1; i++) {
+                    for (const key of Object.keys(arg)) {
+                        if (arr[i] === key) {
+                            arr.splice(i - 1, 3, { kek: await arg[key](arr[i - 1], arr[i + 1]) });
+                            i = i - 1;
+                        }
                     }
                 }
             }
