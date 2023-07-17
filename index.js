@@ -65,3 +65,4 @@ class bracketsParser {
         return stack[0];
     }
 }
+module.exports = bracketsParser
